@@ -1,4 +1,35 @@
-#heading {
-    color : red ;
+.header{
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid #ccc;
+    margin-bottom:10px;
 
+}
+.header> .nav-items> ul{
+    list-style:none;
+    display:flex;
+}
+
+.header > .nav-items>ul>li{
+    margin: 0 10px;
+}
+
+.card-container{
+    width : 250px;
+    padding:10px;
+    margin:10px;
+}
+.card-container:hover{
+       border:1px solid #ccc;
+       cursor:pointer;
+}
+.logo-img{
+    width:80px
+}
+.card-image{
+    width :100%;
+}
+.card-container-body{
+    display:flex;
+    flex-wrap:wrap;
 }
