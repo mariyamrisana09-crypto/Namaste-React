@@ -10,7 +10,7 @@ const RestuarentCard = (props) =>{
                     ? CDN_URL_IMG + resData.card.cloudinaryImageId
                     : CDN_URL_LIVE_IMG + resData.card?.card?.info?.cloudinaryImageId   
                 } / >
-                <h3 className="res-name">{resData.card.name}</h3>
+                <h3 className="res-name">{resData.card.name || resData.card?.card?.info?.name}</h3>
                 <h3 className="cusines">{(resData.card?.card?.info?.cuisines|| resData.cuisines)?.join(", ")}</h3>
                 <h3 className="price">₹ {(resData.card?.costForTwo || resData.card?.card?.info?.costForTwo )} Only</h3>
                 <h3 className="delivary-time">35 mins</h3>
