@@ -1,9 +1,10 @@
-import { resLists } from "../utils/mockData";
+
 import RestuarentCard from "../components/RestuarentCard";
 import { useState, useEffect } from "react";
+import Shimmer from "../components/Shimmer";
 
 const Body = () => {
-  const [listofRestaurant, setlistofRestaurant] = useState(resLists);
+  const [listofRestaurant, setlistofRestaurant] = useState([]);
   const [filteredListRestaurant, setFilteredListRestaurant] = useState([]);
 
   const [searchText, setSearchText] = useState("");
@@ -27,7 +28,7 @@ const Body = () => {
     )
   };
 
-  return (
+  return listofRestaurant.length === 0 ?( <Shimmer /> ): (
     <div className="body">
       <div className="search-bar">
         <input
@@ -66,7 +67,7 @@ const Body = () => {
       <div className="card-container-body">
         {filteredListRestaurant.map((restuarent) => (
           <RestuarentCard
-            key={restuarent.card.id ?? restuarent.card?.card?.info?.id}
+            key={restuarent.card?.card?.info?.id}
             resData={restuarent}
           />
         ))}

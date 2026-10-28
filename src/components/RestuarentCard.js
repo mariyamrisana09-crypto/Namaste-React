@@ -6,15 +6,13 @@ const RestuarentCard = (props) =>{
     return (
         <div className="card-container">
                 <img className="card-image" src={
-                    resData.card?.cloudinaryImageId
-                    ? CDN_URL_IMG + resData.card.cloudinaryImageId
-                    : CDN_URL_LIVE_IMG + resData.card?.card?.info?.cloudinaryImageId   
+                  CDN_URL_LIVE_IMG + resData.card?.card?.info?.cloudinaryImageId   
                 } / >
-                <h3 className="res-name">{resData.card.name || resData.card?.card?.info?.name}</h3>
-                <h3 className="cusines">{(resData.card?.card?.info?.cuisines|| resData.cuisines)?.join(", ")}</h3>
-                <h3 className="price">₹ {(resData.card?.costForTwo || resData.card?.card?.info?.costForTwo )} Only</h3>
+                <h3 className="res-name">{ resData.card?.card?.info?.name}</h3>
+                <h3 className="cusines">{resData.card?.card?.info?.cuisines?.join(", ")}</h3>
+                <h3 className="price">₹ {resData.card?.card?.info?.costForTwo } Only</h3>
                 <h3 className="delivary-time">35 mins</h3>
-                <h3 className="rating">{(resData.card?.avgRating || resData.card?.card?.info?.avgRating)} ★</h3>
+                <h3 className="rating">{ resData.card?.card?.info?.avgRating} ★</h3>
         </div>
     )
 }
