@@ -2,6 +2,8 @@
 import RestuarentCard from "../components/RestuarentCard";
 import { useState, useEffect } from "react";
 import Shimmer from "../components/Shimmer";
+import {CDN_URL_RESTAURANT_LIST} from "../utils/constants";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listofRestaurant, setlistofRestaurant] = useState([]);
@@ -14,18 +16,17 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=11.347925682214228&lng=75.7542722672224&collection=83661&tags=layout_CCS_Desserts&sortBy=&filters=&type=rcv2&offset=0&page_type=null",
-    );
+    const data = await fetch( CDN_URL_RESTAURANT_LIST );
 
     const json = await data.json();
 
-    setlistofRestaurant(
-      json?.data?.cards?.filter((restaurent) => restaurent.card?.card?.info)
-    );
-    setFilteredListRestaurant(
-         json?.data?.cards?.filter((restaurent) => restaurent.card?.card?.info)
-    )
+    const restaurants = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    
+    
+    setlistofRestaurant(restaurants )
+    
+    setFilteredListRestaurant(restaurants )
+    
   };
 
   return listofRestaurant.length === 0 ?( <Shimmer /> ): (
@@ -54,9 +55,10 @@ const Body = () => {
           className="filter-button"
           onClick={() => {
             const filteredRestaurant = listofRestaurant.filter((res) => {
-              const rating =
-                res.card?.avgRating ?? res.card?.card?.info?.avgRating;
-              return rating > 4.3;
+              // const rating =
+              //   res.card?.avgRating ?? res.card?.card?.info?.avgRating;
+              // return rating > 4.3;
+              console.log(res.info.id)
             });
             setFilteredListRestaurant(filteredRestaurant);
           }}
@@ -66,10 +68,10 @@ const Body = () => {
       </div>
       <div className="card-container-body">
         {filteredListRestaurant.map((restuarent) => (
-          <RestuarentCard
-            key={restuarent.card?.card?.info?.id}
-            resData={restuarent}
-          />
+          <Link className="body-card-link" key={restuarent.info?.id} to={"/restaurents/"+restuarent.info?.id}>
+            <RestuarentCard resData={restuarent} />
+          </Link>
+          
         ))}
       </div>
     </div>
